@@ -1,0 +1,4 @@
+{
+  "_comment": "cycleStartDate must be an ISO 8601 date string (YYYY-MM-DD) and must be a Sunday that unit 1 works the noon shift on Sunday and Monday.",
+  "cycleStartDate": "2026-02-22"
+}

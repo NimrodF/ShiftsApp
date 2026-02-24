@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, Users } from 'lucide-react';
 
 export default function ShiftScheduleApp() {
@@ -52,9 +52,25 @@ export default function ShiftScheduleApp() {
     );
   };
 
+  const DEFAULT_CYCLE_START_DATE = '2026-02-22';
+  const [cycleStartDate, setCycleStartDate] = useState(DEFAULT_CYCLE_START_DATE);
   const [selectedDate, setSelectedDate] = useState(getIsraelTodayIsoDate);
   const [selectedShift, setSelectedShift] = useState('morning');
   const [viewMode, setViewMode] = useState('daily');
+
+  useEffect(() => {
+    fetch(`${import.meta.env.BASE_URL}config.json`)
+      .then((res) => {
+        if (!res.ok) throw new Error('config.json not found');
+        return res.json();
+      })
+      .then((config) => {
+        if (config.cycleStartDate) setCycleStartDate(config.cycleStartDate);
+      })
+      .catch(() => {
+        // Fall back to the default cycle start date already set in state
+      });
+  }, []);
 
   const shifts = {
     morning: { name: 'משמרת בוקר', time: 'תדריך 06:30 | תחילת משמרת 07:00', icon: '🌅' },
@@ -84,9 +100,8 @@ export default function ShiftScheduleApp() {
 
   const getUnitOnShift = (date, shift) => {
     const targetDate = createUtcDateFromIso(date);
-    // Reference date: February 22, 2026 (Sunday) with W=0
-    const cycleStartDate = createUtcDateFromIso('2026-02-22');
-    const timeDiff = targetDate - cycleStartDate;
+    const cycleStart = createUtcDateFromIso(cycleStartDate);
+    const timeDiff = targetDate - cycleStart;
     const daysDiff = Math.floor(timeDiff / DAY_IN_MS);
     const totalDays = daysDiff >= 0 ? daysDiff : daysDiff + Math.ceil(Math.abs(daysDiff) / 21) * 21;
     const W = Math.floor(totalDays / 7) % 3;
