@@ -1,6 +1,6 @@
 # לוח משמרות יח"ס — Shift Schedule App
 
-A React web application that calculates and displays which יח"ס (unit) is on duty for any given date and shift, 
+A React web application that calculates and displays which יח"ס (unit) is on duty for any given date and shift,
 based on a rotating 3-week cycle.
 
 ## Features
@@ -9,16 +9,16 @@ based on a rotating 3-week cycle.
 - **Weekly view** — see the full week's schedule for all three shifts in a single table
 - **Israel time-zone aware** — all date calculations use `Asia/Jerusalem`
 - **Configurable baseline** — the cycle start date is read from an external config file at runtime, no rebuild required
-- **Deployed to GitHub Pages** automatically on every push to `main`
+- **Deployed to GitHub Pages** automatically on every push to `master`
 
 ## Shift Schedule
 
-| Shift | Briefing | Start |
-|-------|----------|-------|
-| 🌅 Morning | 06:30 | 07:00 |
-| ☀️ Noon (Sun / Tue / Thu) | 14:30 | 15:00 |
-| ☀️ Noon (Mon / Wed / Fri / Sat) | 13:30 | 14:00 |
-| 🌙 Night | 20:30 | 21:00 |
+| Shift                           | Briefing | Start |
+| ------------------------------- | -------- | ----- |
+| 🌅 Morning                      | 06:30    | 07:00 |
+| ☀️ Noon (Sun / Tue / Thu)       | 14:30    | 15:00 |
+| ☀️ Noon (Mon / Wed / Fri / Sat) | 13:30    | 14:00 |
+| 🌙 Night                        | 20:30    | 21:00 |
 
 Three units (יח"ס 1, 2, 3) rotate across all shifts on a 21-day (3-week) cycle.
 
@@ -60,13 +60,13 @@ To reset the schedule:
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| UI framework | React 18 |
-| Build tool | Vite 5 |
-| Styling | Tailwind CSS 3 |
-| Icons | lucide-react |
-| Deployment | GitHub Pages via GitHub Actions |
+| Layer        | Technology                      |
+| ------------ | ------------------------------- |
+| UI framework | React 18                        |
+| Build tool   | Vite 5                          |
+| Styling      | Tailwind CSS 3                  |
+| Icons        | lucide-react                    |
+| Deployment   | GitHub Pages via GitHub Actions |
 
 ## Getting Started
 
@@ -105,7 +105,7 @@ npm run preview
 
 ## Deployment
 
-Every push to the `main` branch triggers the GitHub Actions workflow in `.github/workflows/deploy.yaml`, which:
+Every push to the `master` branch triggers the GitHub Actions workflow in `.github/workflows/deploy.yaml`, which:
 
 1. Checks out the repository
 2. Runs `npm install && npm run build`
