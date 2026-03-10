@@ -65,6 +65,7 @@ export default function ShiftScheduleApp() {
   const [cycleStartDate, setCycleStartDate] = useState(
     DEFAULT_CYCLE_START_DATE,
   );
+  const [appLastUpdated, setAppLastUpdated] = useState(null);
   const [selectedDate, setSelectedDate] = useState(getIsraelTodayIsoDate);
   const [selectedShift, setSelectedShift] = useState('morning');
   const [viewMode, setViewMode] = useState('daily');
@@ -77,6 +78,7 @@ export default function ShiftScheduleApp() {
       })
       .then((config) => {
         if (config.cycleStartDate) setCycleStartDate(config.cycleStartDate);
+        if (config.appLastUpdated) setAppLastUpdated(config.appLastUpdated);
       })
       .catch(() => {
         // Fall back to the default cycle start date already set in state
@@ -232,7 +234,7 @@ export default function ShiftScheduleApp() {
             בחר תאריך ומשמרת כדי לראות איזו יח"ס במשמרת
           </p>
           <p className='text-gray-400 text-sm mt-1'>
-            תאריך עדכון אחרון: {formatDateShort(cycleStartDate)}
+            תאריך עדכון אחרון: {appLastUpdated ? formatDateShort(appLastUpdated) : ''}
           </p>
         </div>
 
